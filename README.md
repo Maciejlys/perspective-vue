@@ -1,7 +1,7 @@
 # perspective-vue
 
-My first very small app in Vue3. <br/>
-As I soon will be writing production app in Vue3 I am now taking my time to learn it by deving some small ups to learn all I need to learn to be able to do so. <br/>
+My first very small app in Vue3 that you can check [here](https://neon-bunny-333a5d.netlify.app/) <br/>
+As I soon will be writing production app in Vue3 I am now taking my time to learn it by deving some small apps to learn all I need to learn to be able to do so. <br/>
 Since the focus here is on learning Vue for now there will be no cypress and unit tests.
 
 ## Recommended IDE Setup
