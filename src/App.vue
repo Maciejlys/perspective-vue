@@ -1,20 +1,33 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue'
+<script lang="ts">
+import InputGroup from './components/Input-group.vue'
+import { defineComponent } from 'vue'
 
-const perspective = ref(100)
-const rotateX = ref(0)
-const rotateY = ref(0)
-const rotateZ = ref(0)
-const box = computed(() => {
-  return {
-    transform: `perspective(${perspective.value}px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg) rotateZ(${rotateZ.value}deg)`
+export default defineComponent({
+  data() {
+    return {
+      perspective: 100,
+      rotateX: 0,
+      rotateY: 0,
+      rotateZ: 0
+    }
+  },
+  methods: {
+    async copyStyle() {
+      await navigator.clipboard.writeText(JSON.stringify(this.box))
+      alert('Copied to clipboard!')
+    }
+  },
+  computed: {
+    box() {
+      return {
+        transform: `perspective(${this.perspective}px) rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg)`
+      }
+    }
+  },
+  components: {
+    InputGroup
   }
 })
-
-const copyStyle = async () => {
-  await navigator.clipboard.writeText(JSON.stringify(box.value))
-  alert('Copied to clipboard!')
-}
 </script>
 
 <template>
@@ -22,22 +35,10 @@ const copyStyle = async () => {
 
   <main>
     <div class="inputs">
-      <div class="input">
-        <span>perspective: {{ perspective }}px</span>
-        <input type="range" v-model="perspective" min="0" max="999" />
-      </div>
-      <div class="input">
-        <span>rotateX: {{ rotateX }}px</span>
-        <input type="range" v-model="rotateX" min="-180" max="180" />
-      </div>
-      <div class="input">
-        <span>rotateY: {{ rotateY }}px</span>
-        <input type="range" v-model="rotateY" min="-180" max="180" />
-      </div>
-      <div class="input">
-        <span>rotateZ: {{ rotateZ }}px</span>
-        <input type="range" v-model="rotateZ" min="-180" max="180" />
-      </div>
+      <InputGroup label="perspective" v-model="perspective" />
+      <InputGroup label="rotateX" v-model="rotateX" />
+      <InputGroup label="rotateY" v-model="rotateY" />
+      <InputGroup label="rotateZ" v-model="rotateZ" />
     </div>
     <div class="outside">
       <div class="box" :style="box"></div>
